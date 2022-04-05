@@ -11,15 +11,25 @@ Path("config").mkdir(parents=True, exist_ok=True)
 # Docker env
 if os.environ.get('TOKEN'):
     Token = os.environ['TOKEN']
-    chatid = os.environ['CHATID']
-    delay = int(os.environ['DELAY'])
 else:
     Token = "X"
+    print("TOKEN not set!")
+
+if os.environ.get('CHATID'):
+    chatid = os.environ['CHATID']
+else:
     chatid = "X"
+    print("CHATID not set!")
+
+if os.environ.get('DELAY'):
+    delay = int(os.environ['DELAY'])
+else:
     delay = 60
 
-if Token == "X":
-    print("Token not set!")
+if os.environ.get('SHOWTEXT'):
+    show_text = boolean(os.environ['SHOWTEXT'])
+else:
+    show_text = True 
 
 rss_dict = {}
 
@@ -148,9 +158,13 @@ def rss_monitor(context):
             #context.bot.send_message(chatid, '<b>' + title + '</b>' + '\n\n' +
             #        text + '<a href="' + link + '">' + '---&gt;</a>',
             #        parse_mode='HTML')
-            context.bot.send_message(chatid, '<b>' + name + '</b>\n<a href="' + link + '">' + title +'</a>' + '\n\n' + text,
+            if show_text:
+                context.bot.send_message(chatid, '<b>' + name + '</b>\n<a href="' + link + '">' + title +'</a>' + '\n\n' + text,
                     parse_mode='HTML')
-
+            else:
+                context.bot.send_message(chatid, '<b>' + name + '</b>\n<a href="' + link + '">' + title +'</a>',
+                    parse_mode='HTML')
+                
 
 def cmd_test(update, context):
     url = "https://www.reddit.com/r/funny/new/.rss"
