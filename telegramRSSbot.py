@@ -27,7 +27,7 @@ else:
     delay = 60
 
 if os.environ.get('SHOWTEXT'):
-    show_text = boolean(os.environ['SHOWTEXT'])
+    show_text = bool(os.environ['SHOWTEXT'])
 else:
     show_text = True 
 
