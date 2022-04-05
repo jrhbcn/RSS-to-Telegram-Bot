@@ -143,9 +143,12 @@ def rss_monitor(context):
             title = rss_d.entries[0]['title']
             text = ''
             if (rss_d.entries[0]['description'] != None):
-                text = BeautifulSoup(rss_d.entries[0]['description']).get_text('\n') + '\n'
-            context.bot.send_message(chatid, '<b>' + title + '</b>' + '\n\n' +
-                    text + '<a href="' + link + '">' + '---&gt;</a>',
+                #text = BeautifulSoup(rss_d.entries[0]['description']).get_text('\n') + '\n'
+                text = BeautifulSoup(rss_d.entries[0]['description']).get_text() + '\n'
+            #context.bot.send_message(chatid, '<b>' + title + '</b>' + '\n\n' +
+            #        text + '<a href="' + link + '">' + '---&gt;</a>',
+            #        parse_mode='HTML')
+            context.bot.send_message(chatid, '<b>' + name + '</b>\n<a href="' + link + '">' + title +'</a>' + '\n\n' + text,
                     parse_mode='HTML')
 
 
