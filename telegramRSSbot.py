@@ -135,9 +135,7 @@ def cmd_help(update, context):
         "\n/test Inbuilt command that fetches a post from Reddits RSS\." +
         "\n\nThe current chatId is: " + str(update.message.chat.id) +
         "\n\nThe stored chatId is: " + str(chatid) +
-        "\n\nThe value of SHOWTEXT is: " + str(show_text) +
-        "\n\nIf you like the project, star it on [GitHUb](https://github.com/jrhbcn/RSS\-to\-Telegram\-Bot)")
-
+        "\n\nThe value of SHOWTEXT is: " + str(show_text))
 
 def rss_monitor(context):
     for name, url_list in rss_dict.items():
