@@ -6,9 +6,6 @@ A self-hosted telegram python bot that dumps posts from RSS feeds to a telegram 
 
 ![Image of help menu](https://bokker.github.io/telegram.png)
 
-### Docker
-
-For the docker image go to: https://hub.docker.com/r/bokker/rss.to.telegram/
 
 ### Installation
 
@@ -67,5 +64,5 @@ docker create \
   -e CHATID=InsertChatID \
   -v /path/to/host/config:/app/config \
   --restart unless-stopped \
-  bokker/rss.to.telegram
+  ghcr.io/jrhbcn/rss-to-telegram:latest
 ```
