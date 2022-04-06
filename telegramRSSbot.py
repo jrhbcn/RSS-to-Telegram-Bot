@@ -134,8 +134,8 @@ def cmd_help(update, context):
         "\n/remove \!Title\! removes the RSS link" +
         "\n/list Lists all the titles and the RSS links from the DB" +
         "\n/test Inbuilt command that fetches a post from Reddits RSS\." +
-        "\n\nThe current chatId is: " + telegram.utils.helpers.escape_markdown(str(update.message.chat.id)) +
-        "\n\nThe stored chatId is: " + telegram.utils.helpers.escape_markdown(str(chatid)) +
+        "\n\nThe current chatId is: " + telegram.utils.helpers.escape_markdown(str(update.message.chat.id), version=2) +
+        "\n\nThe stored chatId is: " + telegram.utils.helpers.escape_markdown(str(chatid), version=2) +
         "\n\nThe value of SHOWTEXT is: " + str(show_text))
 
 def rss_monitor(context):
