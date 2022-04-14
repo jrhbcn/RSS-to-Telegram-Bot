@@ -46,9 +46,7 @@ rss_dict = {}
 logging.basicConfig(format='%(asctime)s - %(name)s - %(levelname)s - %(message)s',
                     level=logging.INFO)
 
-# SQLITE
-
-if True:
+def push_ping():
     if push_id is not None:
       try:
         req = urllib.request.Request(push_id, headers={'User-Agent': 'XYZ/3.0'})
@@ -58,7 +56,7 @@ if True:
         print("ping push_id failed: %s" % e)
       print("ping push_id done")
 
-  
+# SQLITE
 
 def sqlite_connect():
     global conn
@@ -161,14 +159,7 @@ def cmd_help(update, context):
 
 def rss_monitor(context):
     
-    if push_id is not None:
-      try:
-        req = urllib.request.Request(push_id, headers={'User-Agent': 'XYZ/3.0'})
-        urllib.request.urlopen(req, timeout=10)
-      except socket.error as e:
-        # Log ping failure here...
-        print("ping push_id failed: %s" % e)
-      print("ping push_id done")
+    push_ping()
     
     for name, url_list in rss_dict.items():
         rss_d = feedparser.parse(url_list[0])
@@ -230,6 +221,9 @@ def main():
     except sqlite3.OperationalError:
         pass
     rss_load()
+
+    # Push ping if setup
+    push_ping()
 
     job_queue.run_repeating(rss_monitor, delay)
 
