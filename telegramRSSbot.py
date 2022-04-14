@@ -8,8 +8,11 @@ from bs4 import BeautifulSoup
 import telegram
 import socket
 import urllib.request
+import sys
     
 Path("config").mkdir(parents=True, exist_ok=True)
+
+print("I am here", file=sys.stderr)
 
 # Docker env
 if os.environ.get('TOKEN'):
@@ -156,7 +159,7 @@ def rss_monitor(context):
       except socket.error as e:
         # Log ping failure here...
         print("ping failed: %s" % e)
-      print("ping push_id done")
+      print("ping push_id done", file=sys.stderr)
     
     for name, url_list in rss_dict.items():
         rss_d = feedparser.parse(url_list[0])
