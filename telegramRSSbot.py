@@ -34,10 +34,12 @@ if os.environ.get('SHOWTEXT'):
 else:
     show_text = True 
 
-if os.environ.get('PUSH_ID'):
-    push_id = os.environ['PUSH_ID']
+if os.environ.get('PUSHID'):
+    push_id = os.environ['PUSHID']
+    print('push_id = ' + push_id)
 else:
     push_id = None 
+    print('push_id is not set')
 
 rss_dict = {}
 
@@ -153,7 +155,7 @@ def rss_monitor(context):
       except socket.error as e:
         # Log ping failure here...
         print("ping failed: %s" % e)
-      print("ping push id done")
+      print("ping push_id done")
     
     for name, url_list in rss_dict.items():
         rss_d = feedparser.parse(url_list[0])
