@@ -8,11 +8,8 @@ from bs4 import BeautifulSoup
 import telegram
 import socket
 import urllib.request
-import sys
     
 Path("config").mkdir(parents=True, exist_ok=True)
-
-print("I am here", file=sys.stderr)
 
 # Docker env
 if os.environ.get('TOKEN'):
@@ -155,11 +152,11 @@ def rss_monitor(context):
     
     if push_id is not None:
       try:
-        urllib.request.urlopen(push_id, timeout=10)
+        req = urllib.request.Request(push_id, headers={'User-Agent': 'XYZ/3.0'})
+        urllib.request.urlopen(req, timeout=10)
       except socket.error as e:
         # Log ping failure here...
         print("ping failed: %s" % e)
-      print("ping push_id done", file=sys.stderr)
     
     for name, url_list in rss_dict.items():
         rss_d = feedparser.parse(url_list[0])
