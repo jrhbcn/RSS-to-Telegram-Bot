@@ -156,7 +156,8 @@ def rss_monitor(context):
         urllib.request.urlopen(req, timeout=10)
       except socket.error as e:
         # Log ping failure here...
-        print("ping failed: %s" % e)
+        print("ping push_id failed: %s" % e)
+      print("ping push_id done")
     
     for name, url_list in rss_dict.items():
         rss_d = feedparser.parse(url_list[0])
