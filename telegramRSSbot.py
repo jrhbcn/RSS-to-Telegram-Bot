@@ -48,6 +48,17 @@ logging.basicConfig(format='%(asctime)s - %(name)s - %(levelname)s - %(message)s
 
 # SQLITE
 
+if True:
+    if push_id is not None:
+      try:
+        req = urllib.request.Request(push_id, headers={'User-Agent': 'XYZ/3.0'})
+        urllib.request.urlopen(req, timeout=10)
+      except socket.error as e:
+        # Log ping failure here...
+        print("ping push_id failed: %s" % e)
+      print("ping push_id done")
+
+  
 
 def sqlite_connect():
     global conn
