@@ -6,7 +6,9 @@ from telegram.ext import Updater, CommandHandler
 from pathlib import Path
 from bs4 import BeautifulSoup
 import telegram
-
+import socket
+import urllib.request
+    
 Path("config").mkdir(parents=True, exist_ok=True)
 
 # Docker env
@@ -31,6 +33,11 @@ if os.environ.get('SHOWTEXT'):
     show_text = os.environ['SHOWTEXT'].lower() in ("yes", "true", "t", "1")
 else:
     show_text = True 
+
+if os.environ.get('PUSH_ID'):
+    push_id = os.environ['PUSH_ID']
+else:
+    push_id = None 
 
 rss_dict = {}
 
@@ -139,6 +146,14 @@ def cmd_help(update, context):
         "\n\nThe value of SHOWTEXT is: " + str(show_text))
 
 def rss_monitor(context):
+    
+    if push_id:
+      try:
+        urllib.request.urlopen(push_id, timeout=10)
+      except socket.error as e:
+        # Log ping failure here...
+        print("ping failed: %s" % e)
+    
     for name, url_list in rss_dict.items():
         rss_d = feedparser.parse(url_list[0])
         if (url_list[1] != rss_d.entries[0]['link']):
