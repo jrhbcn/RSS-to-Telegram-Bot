@@ -145,7 +145,8 @@ def cmd_help(update, context):
         "\n/test Inbuilt command that fetches a post from Reddits RSS\." +
         "\n\nThe current chatId is: " + telegram.utils.helpers.escape_markdown(str(update.message.chat.id), version=2) +
         "\n\nThe stored chatId is: " + telegram.utils.helpers.escape_markdown(str(chatid), version=2) +
-        "\n\nThe value of SHOWTEXT is: " + str(show_text))
+        "\n\nThe value of SHOWTEXT is: " + str(show_text) + 
+        "\n\nThe value of PUSHID is: " + telegram.utils.helpers.escape_markdown(str(push_id), version=2))
 
 def rss_monitor(context):
     
