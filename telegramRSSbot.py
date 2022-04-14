@@ -147,7 +147,7 @@ def cmd_help(update, context):
 
 def rss_monitor(context):
     
-    if push_id:
+    if push_id is not None:
       try:
         urllib.request.urlopen(push_id, timeout=10)
       except socket.error as e:
